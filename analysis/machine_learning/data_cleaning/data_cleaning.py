@@ -8,6 +8,8 @@ Loading in the accepted.csv file and pre-processing the data for analysis
 -----
 """
 
+
+
 def map_values_to_int(feature_selected_dataset):
     #mapping text values to int for our analysis
     feature_selected_dataset['grade'] = feature_selected_dataset['grade'].map({'A': 7, 'B': 6, 'C': 5, 'D': 4, 'E': 3, 'F': 2, 'G': 1})
@@ -29,7 +31,7 @@ def select_features_for_analysis(reduced_column_dataset):
                 "avg_cur_bal", "acc_open_past_24mths",
                 'loan_status']
 
-    return reduced_column_dataset[features_for_analysis]
+    return reduced_column_dataset[features_for_analysis], len(features_for_analysis)
 
 def strip_out_specified_columns(original_dataset_with_loan_status):
     #getting rid of columns that we dont need from our dataset. This should aid with performance
@@ -74,7 +76,7 @@ def dataset_clean():
     boolean_loan_status_dataset = boolean_loan_status(original_uncleaned_dataset)
     original_dataset_with_loan_status = boolean_loan_status_dataset.dropna(thresh=340000, axis=1)
     reduced_column_dataset = strip_out_specified_columns(original_dataset_with_loan_status)
-    feature_selected_dataset = select_features_for_analysis(reduced_column_dataset)
+    feature_selected_dataset, length_of_features = select_features_for_analysis(reduced_column_dataset)
 
     #forward fill and drop na
     feature_selected_dataset = feature_selected_dataset.fillna(method = 'ffill').dropna()
@@ -97,7 +99,7 @@ def dataset_clean():
     scaled_dataset = pd.concat([subset_of_loanstatus_one, subset_of_loanstatus_zero])
     scaled_dataset = scaled_dataset.sample(frac=1).reset_index(drop=True)
 
-    return scaled_dataset
+    return scaled_dataset, length_of_features
 
 def main():
     dataset_clean()
