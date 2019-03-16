@@ -13,6 +13,13 @@ import seaborn as sns
 from sklearn import tree
 #matplotlib inline
 
+
+def loan_condition(status):
+    if status in bad_loan:
+        return 'Bad Loan'
+    else:
+        return 'Good Loan'
+
 def dataset_clean_year():
     df = pd.read_csv(r'/home/beneen/PycharmProjects/p2p_lending/analysis/data_sample/accepted.csv')
 
@@ -29,9 +36,3 @@ def dataset_clean_year():
 
     return df
 
-
-def loan_condition(status):
-    if status in bad_loan:
-        return 'Bad Loan'
-    else:
-        return 'Good Loan'

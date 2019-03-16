@@ -15,7 +15,7 @@ from sklearn import tree
 from dataset_clean import dataset_clean_year
 
 
-if __name__ == "__main__":
+
 
     df = dataset_clean_year()
 
