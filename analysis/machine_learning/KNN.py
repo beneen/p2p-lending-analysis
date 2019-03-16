@@ -1,14 +1,10 @@
-from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
-import seaborn as sns
-
 from analysis.machine_learning.get_test_and_train import get_test_and_train
 from analysis.machine_learning.plotting_confusion_matrix import plotting_confusion_matrix
 from analysis.machine_learning.data_cleaning import data_cleaning
 from sklearn.model_selection import GridSearchCV
-
 from analysis.machine_learning.roc_curve_plot import roc_curve_plot
 
 """

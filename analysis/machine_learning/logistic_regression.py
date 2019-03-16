@@ -1,9 +1,6 @@
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
-import seaborn as sns
 from sklearn import linear_model
-
 from analysis.machine_learning.get_test_and_train import get_test_and_train
 from analysis.machine_learning.plotting_confusion_matrix import plotting_confusion_matrix
 from analysis.machine_learning.cross_validation import cross_validation_best_parameters
