@@ -1,13 +1,14 @@
+import matplotlib.pyplot as plt
+import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
-import matplotlib.pyplot as plt
+from sklearn.metrics import roc_auc_score
+from sklearn.model_selection import RandomizedSearchCV
+
+from analysis.machine_learning.data_cleaning import data_cleaning
 from analysis.machine_learning.get_test_and_train import get_test_and_train
 from analysis.machine_learning.plotting_confusion_matrix import plotting_confusion_matrix
-from analysis.machine_learning.data_cleaning import data_cleaning
 from analysis.machine_learning.roc_curve_plot import roc_curve_plot
-from sklearn.model_selection import RandomizedSearchCV
-import numpy as np
-from sklearn.metrics import roc_auc_score
 
 """
 -----
@@ -15,21 +16,20 @@ random forest implementation and plotting
 -----
 """
 
-def main():
 
+def main():
     dataset, length_of_features = data_cleaning.dataset_clean()
 
     # for testing
-    dataset = dataset.head(500)
-
+    # dataset = dataset.head(500)
 
     X_train, X_test, y_train, y_test = get_test_and_train(dataset)
-
 
     random_forest = RandomForestClassifier(criterion='gini', random_state=0)
     maximum_features = range(1, dataset.shape[1] - 1)
     parameters = dict(max_features=maximum_features)
-    randomised_search = RandomizedSearchCV(random_forest, parameters, cv=10, scoring='accuracy', n_iter=len(maximum_features), random_state=10)
+    randomised_search = RandomizedSearchCV(random_forest, parameters, cv=10, scoring='accuracy',
+                                           n_iter=len(maximum_features), random_state=10)
     X = dataset.iloc[:, :-1].values
     y = dataset.iloc[:, -1].values
     randomised_search.fit(X, y)
@@ -37,7 +37,7 @@ def main():
     print(randomised_search.best_estimator_)
 
     random_forest = RandomForestClassifier(bootstrap=True, criterion="gini",
-                                          max_features=randomised_search.best_estimator_.max_features, random_state=0)
+                                           max_features=randomised_search.best_estimator_.max_features, random_state=0)
     random_forest.fit(X_train, y_train)
     random_forest_predict = random_forest.predict(X_test)
     random_forest_predict_probabilities = random_forest.predict_proba(X_test)[:, 1]

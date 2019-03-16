@@ -1,10 +1,11 @@
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import GridSearchCV
+from sklearn.neighbors import KNeighborsClassifier
+
+from analysis.machine_learning.data_cleaning import data_cleaning
 from analysis.machine_learning.get_test_and_train import get_test_and_train
 from analysis.machine_learning.plotting_confusion_matrix import plotting_confusion_matrix
-from analysis.machine_learning.data_cleaning import data_cleaning
-from sklearn.model_selection import GridSearchCV
 from analysis.machine_learning.roc_curve_plot import roc_curve_plot
 
 """
@@ -15,7 +16,6 @@ KNN implementation and plot
 
 
 def main():
-
     dataset, length_of_features = data_cleaning.dataset_clean()
     # for testing
 
@@ -46,4 +46,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

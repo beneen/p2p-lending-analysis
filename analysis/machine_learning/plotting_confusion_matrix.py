@@ -1,7 +1,8 @@
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.metrics import confusion_matrix
 import itertools
+
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn.metrics import confusion_matrix
 
 """
 -----
@@ -9,18 +10,19 @@ Function that plots the confusion matrix rather than have this code repeated in 
 -----
 """
 
-def plotting_confusion_matrix(y_test, model, normalize=False):
 
-    #getting the confusion matrix
+def plotting_confusion_matrix(y_test, model, normalize=False):
+    # getting the confusion matrix
     analysis_confusion_matrix = confusion_matrix(y_test, model, labels=[0, 1])
-    outcomes=["pay in full", "default"]
+    outcomes = ["pay in full", "default"]
     cmap = plt.cm.plasma
     title = "Confusion Matrix"
     if normalize:
-        analysis_confusion_matrix = analysis_confusion_matrix.astype('float') / analysis_confusion_matrix.sum(axis=1)[:, np.newaxis]
+        analysis_confusion_matrix = analysis_confusion_matrix.astype('float') / analysis_confusion_matrix.sum(axis=1)[:,
+                                                                                np.newaxis]
         analysis_confusion_matrix = np.around(analysis_confusion_matrix, decimals=3)
 
-    #setting up plot
+    # setting up plot
     plt.imshow(analysis_confusion_matrix, interpolation='nearest', cmap=cmap)
     plt.title(title)
     plt.colorbar()
