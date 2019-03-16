@@ -16,10 +16,7 @@ random forest implementation and plotting
 -----
 """
 
-
-def main():
-    dataset, length_of_features = data_cleaning.dataset_clean()
-
+def random_forest(dataset, length_of_features):
     # for testing
     # dataset = dataset.head(500)
 
@@ -59,6 +56,12 @@ def main():
     plt.figure(figsize=(6, 6))
     plotting_confusion_matrix(y_test, random_forest_predict, normalize=True)
     plt.show()
+
+
+def main():
+    dataset, length_of_features = data_cleaning.dataset_clean()
+    random_forest(dataset, length_of_features)
+
 
 
 if __name__ == "__main__":

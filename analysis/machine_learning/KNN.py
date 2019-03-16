@@ -15,12 +15,11 @@ KNN implementation and plot
 """
 
 
-def main():
-    dataset, length_of_features = data_cleaning.dataset_clean()
+def k_nearest_neighbour(dataset):
     # for testing
+    # dataset = dataset.head(500)
 
     X_train, X_test, y_train, y_test = get_test_and_train(dataset)
-
     knn_classsifier = KNeighborsClassifier()
     k_range = list(range(35, 50))
     parameter_grid = dict(n_neighbors=k_range)
@@ -42,6 +41,11 @@ def main():
     plt.figure(figsize=(6, 6))
     plotting_confusion_matrix(y_test, knn_prediction, normalize=True)
     plt.show()
+
+
+def main():
+    dataset, _ = data_cleaning.dataset_clean()
+    k_nearest_neighbour(dataset)
 
 
 if __name__ == "__main__":

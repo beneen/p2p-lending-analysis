@@ -15,8 +15,9 @@ Logistic regression implementation and plots
 """
 
 
-def main():
-    dataset, length_of_features = data_cleaning.dataset_clean()
+def logistic_regression(dataset):
+    # for testing
+    # dataset = dataset.head(500)
 
     X_train, X_test, y_train, y_test = get_test_and_train(dataset)
 
@@ -38,6 +39,11 @@ def main():
     plt.figure(figsize=(6, 6))
     plotting_confusion_matrix(y_test, logistic_regression_predict_bin, normalize=True)
     plt.show()
+
+
+def main():
+    dataset, _ = data_cleaning.dataset_clean()
+    logistic_regression(dataset)
 
 
 if __name__ == "__main__":

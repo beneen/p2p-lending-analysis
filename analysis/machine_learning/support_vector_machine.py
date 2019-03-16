@@ -10,16 +10,14 @@ from analysis.machine_learning.roc_curve_plot import roc_curve_plot
 
 """
 -----
-support vector machine is really slow to run on the full dataset but when testing it does run.
+support vector machine is really slow to run on the full dataset but when testing on smaller sample it does run.
 -----
 """
 
 
-def main():
-    dataset, length_of_features = data_cleaning.dataset_clean()
-
+def support_vector_machine(dataset):
     # for testing
-    # dataset = dataset.head(500)
+    dataset = dataset.head(500)
 
     X_train, X_test, y_train, y_test = get_test_and_train(dataset)
 
@@ -44,8 +42,13 @@ def main():
     roc_curve_plot(y_test, support_vector_machine_prediction_probabilities, 'support vector machine')
     plt.show()
     plt.figure(figsize=(6, 6))
-    plotting_confusion_matrix(support_vector_machine_predictions, normalize=True)
+    plotting_confusion_matrix(y_test, support_vector_machine_predictions, normalize=True)
     plt.show()
+
+
+def main():
+    dataset, _ = data_cleaning.dataset_clean()
+    support_vector_machine(dataset)
 
 
 if __name__ == "__main__":
