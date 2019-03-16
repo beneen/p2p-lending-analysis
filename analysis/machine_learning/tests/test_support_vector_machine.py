@@ -1,4 +1,5 @@
 from unittest import TestCase
+
 import pandas as pd
 
 from analysis.machine_learning.support_vector_machine import support_vector_machine
@@ -14,4 +15,3 @@ class TestSupport_vector_machine(TestCase):
         one = pd.read_csv(r'/home/beneen/PycharmProjects/p2p_lending/analysis/machine_learning/data_cleaning/one.csv')
         with self.assertRaises(Exception):
             support_vector_machine(one)
-

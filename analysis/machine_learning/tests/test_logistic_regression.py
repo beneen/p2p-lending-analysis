@@ -1,4 +1,5 @@
 from unittest import TestCase
+
 import pandas as pd
 
 from analysis.machine_learning.logistic_regression import logistic_regression
