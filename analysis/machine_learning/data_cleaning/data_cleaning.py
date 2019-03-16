@@ -79,7 +79,6 @@ def dataset_clean():
     #forward fill and drop na
     feature_selected_dataset = feature_selected_dataset.fillna(method = 'ffill').dropna()
 
-
     #mapping more values to int for analysis
     mapped_values_to_int_dataset = map_values_to_int(feature_selected_dataset)
 
