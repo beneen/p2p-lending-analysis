@@ -16,7 +16,7 @@ def plotting_confusion_matrix(y_test, model, normalize=False):
     analysis_confusion_matrix = confusion_matrix(y_test, model, labels=[0, 1])
     outcomes = ["pay in full", "default"]
     cmap = plt.cm.plasma
-    title = "Confusion Matrix"
+    title = "confusion matrix"
     if normalize:
         analysis_confusion_matrix = analysis_confusion_matrix.astype('float') / analysis_confusion_matrix.sum(axis=1)[:,
                                                                                 np.newaxis]
