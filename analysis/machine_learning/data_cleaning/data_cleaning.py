@@ -93,9 +93,9 @@ def dataset_clean():
     #resetting the loan status column
     loanstatus_zero = scaled_dataset[scaled_dataset["loan_status"] == 0]
     loanstatus_one = scaled_dataset[scaled_dataset["loan_status"] == 1]
-    subset_of_loanstatus_0 = loanstatus_zero.sample(n=5500)
-    subset_of_loanstatus_1 = loanstatus_one.sample(n=5500)
-    scaled_dataset = pd.concat([subset_of_loanstatus_1, subset_of_loanstatus_0])
+    subset_of_loanstatus_zero = loanstatus_zero.sample(n=5500)
+    subset_of_loanstatus_one = loanstatus_one.sample(n=5500)
+    scaled_dataset = pd.concat([subset_of_loanstatus_one, subset_of_loanstatus_zero])
     scaled_dataset = scaled_dataset.sample(frac=1).reset_index(drop=True)
 
     return scaled_dataset
