@@ -24,7 +24,7 @@ def logistic_regression(dataset):
     c = [0.001, 0.01, 0.1, 1, 10, 100, 1000]
     parameters = dict(C=c)
     best_accuracy, best_classifier = cross_validation_best_parameters(dataset, logistic_regression, parameters)
-    print("Best accuracy is " + str(best_accuracy))
+    print("best accuracy is " + str(best_accuracy))
     print(best_classifier)
 
     logistic_regression_classifier = linear_model.LogisticRegression(C=best_classifier.C)

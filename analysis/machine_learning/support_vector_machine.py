@@ -29,7 +29,6 @@ def support_vector_machine(dataset):
     grid.fit(dataset.iloc[:, :-1].values, dataset.iloc[:, -1].values)
 
     print(grid.best_params_)
-    print("---------------")
     print(grid.best_estimator_)
 
     support_vector_machine_classifier = SVC(kernel="rbf", C=grid.best_estimator_.C)
