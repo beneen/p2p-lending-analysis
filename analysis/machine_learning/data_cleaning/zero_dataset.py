@@ -16,7 +16,7 @@ def zero_dataset(dataset):
 
 def main():
     dataset, _ = data_cleaning.dataset_clean()
-    print(zero_dataset(dataset.head(600)))
+    zero_dataset(dataset.head(600)).to_csv('zero.csv')
 
 
 if __name__ == "__main__":

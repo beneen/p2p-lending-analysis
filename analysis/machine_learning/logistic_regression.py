@@ -14,10 +14,9 @@ Logistic regression implementation and plots
 -----
 """
 
-
 def logistic_regression(dataset):
     # for testing
-    # dataset = dataset.head(500)
+    dataset = dataset.head(500)
 
     X_train, X_test, y_train, y_test = get_test_and_train(dataset)
 
@@ -39,6 +38,8 @@ def logistic_regression(dataset):
     plt.figure(figsize=(6, 6))
     plotting_confusion_matrix(y_test, logistic_regression_predict_bin, normalize=True)
     plt.show()
+
+    return logistic_regression_accuracy
 
 
 def main():
