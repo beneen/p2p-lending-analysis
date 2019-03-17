@@ -6,26 +6,18 @@ takes ages to run because huge csv read
 """
 
 import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
-import sqlite3
-import seaborn as sns
-from sklearn import tree
-#matplotlib inline
-from dataset_clean import dataset_clean_year
-from loan_conditions import loan_conditions
 
+from analysis.charts.dataset_clean import dataset_clean_year
+from analysis.charts.loan_conditions import loan_conditions
 
 if __name__ == "__main__":
-
-
     df = dataset_clean_year()
     df = loan_conditions(df)
 
     print(df['interest_rate'].mean())
     print(df['annual_income'].mean())
 
-    fig = plt.figure(figsize=(16,12))
+    fig = plt.figure(figsize=(16, 12))
 
     ax1 = fig.add_subplot(221)
     ax2 = fig.add_subplot(222)
@@ -36,7 +28,6 @@ if __name__ == "__main__":
     loans_by_region = df.groupby(['grade', 'loan_condition']).size()
     loans_by_region.unstack().plot(kind='bar', stacked=True, colormap=cmap, ax=ax1, grid=False)
     ax1.set_title('Type of Loans by Grade', fontsize=14)
-
 
     loans_by_grade = df.groupby(['sub_grade', 'loan_condition']).size()
     loans_by_grade.unstack().plot(kind='bar', stacked=True, colormap=cmap, ax=ax2, grid=False)

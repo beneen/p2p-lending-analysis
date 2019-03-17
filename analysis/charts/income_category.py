@@ -6,14 +6,10 @@ Produces chart showing the issuance of loans per income category
 
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
-import sqlite3
 import seaborn as sns
-from sklearn import tree
-#matplotlib inline
-from dataset_clean import dataset_clean_year
-from loan_conditions import loan_conditions
 
+from analysis.charts.dataset_clean import dataset_clean_year
+from analysis.charts.loan_conditions import loan_conditions
 
 if __name__ == "__main__":
 
@@ -50,7 +46,6 @@ if __name__ == "__main__":
         col.loc[(col['annual_income'] > 100000) & (col['annual_income'] <= 200000), 'income_category'] = 'Medium'
         col.loc[col['annual_income'] > 200000, 'income_category'] = 'High'
 
-
     # changing string indicators to binary
 
     lst = [df]
@@ -65,7 +60,7 @@ if __name__ == "__main__":
 
     fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(nrows=2, ncols=2, figsize=(14, 6))
 
-    #plotting
+    # plotting
 
     sns.violinplot(x="income_category", y="loan_amount", data=df, palette="Set2", ax=ax1)
     sns.violinplot(x="income_category", y="loan_condition_int", data=df, palette="Set2", ax=ax2)

@@ -17,7 +17,6 @@ support vector machine is really slow to run on the full dataset but when testin
 
 def support_vector_machine(dataset):
     # for testing
-    dataset = dataset.head(500)
 
     X_train, X_test, y_train, y_test = get_test_and_train(dataset)
 
