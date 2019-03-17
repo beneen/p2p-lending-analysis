@@ -1,6 +1,6 @@
 """
+----------
 Produces chart showing the issuance of loans per income category
-
 ----------
 """
 
@@ -16,13 +16,15 @@ if __name__ == "__main__":
     df = dataset_clean_year()
     df = loan_conditions(df)
 
+    # these are all the values of employment length encoded in the dataset
+
     employment_length = ['10+ years', '< 1 year', '1 year', '3 years', '8 years', '9 years',
                          '4 years', '5 years', '6 years', '2 years', '7 years', 'n/a']
 
-    # work in progress need to clean this part up
-
     lst = [df]
     df['emp_length_int'] = np.nan
+
+    # mapping text employment length values in the dataset to int
 
     for col in lst:
         col.loc[col['emp_length'] == '10+ years', "emp_length_int"] = 10
@@ -41,6 +43,8 @@ if __name__ == "__main__":
     df['income_category'] = np.nan
     lst = [df]
 
+    # mapping annual income values to three categories, low med or high
+
     for col in lst:
         col.loc[col['annual_income'] <= 100000, 'income_category'] = 'Low'
         col.loc[(col['annual_income'] > 100000) & (col['annual_income'] <= 200000), 'income_category'] = 'Medium'
@@ -54,13 +58,11 @@ if __name__ == "__main__":
     for col in lst:
         col.loc[df['loan_condition'] == 'Good Loan', 'loan_condition_int'] = 0  # bad loan
         col.loc[df['loan_condition'] == 'Bad Loan', 'loan_condition_int'] = 1  # good loan
-
-    # for labelling, this conversion
     df['loan_condition_int'] = df['loan_condition_int'].astype(int)
 
-    fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(nrows=2, ncols=2, figsize=(14, 6))
-
     # plotting
+
+    fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(nrows=2, ncols=2, figsize=(14, 6))
 
     sns.violinplot(x="income_category", y="loan_amount", data=df, palette="Set2", ax=ax1)
     sns.violinplot(x="income_category", y="loan_condition_int", data=df, palette="Set2", ax=ax2)

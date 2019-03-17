@@ -19,23 +19,31 @@ def k_nearest_neighbour(dataset):
     # for testing
     # dataset = dataset.head(500)
 
+    # test and train sets
     X_train, X_test, y_train, y_test = get_test_and_train(dataset)
     knn_classsifier = KNeighborsClassifier()
     k_range = list(range(35, 50))
+
+    # cross validation
     parameter_grid = dict(n_neighbors=k_range)
     grid = GridSearchCV(knn_classsifier, parameter_grid, cv=10, scoring='accuracy')
     grid.fit(dataset.iloc[:, :-1].values, dataset.iloc[:, -1].values)
     print(grid.best_params_)
     print(grid.best_estimator_)
-    print("", grid.best_params_['n_neighbors'])
+    print(grid.best_params_['n_neighbors'])
     knn_final_classifier = KNeighborsClassifier(n_neighbors=grid.best_params_[
         'n_neighbors'])
 
+    # final classifier
     knn_final_classifier.fit(X_train, y_train)
     knn_prediction = knn_final_classifier.predict(X_test)
     knn_prediction_probability = knn_final_classifier.predict_proba(X_test)[:, 1]
+
+    # accuracy
     knn_accuracy = accuracy_score(y_test, knn_prediction)
     print("knn accuracy ", knn_accuracy)
+
+    # plots
     roc_curve_plot(y_test, knn_prediction_probability, 'KNN')
     plt.show()
     plt.figure(figsize=(6, 6))

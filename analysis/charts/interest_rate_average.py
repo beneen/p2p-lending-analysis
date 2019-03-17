@@ -1,7 +1,6 @@
 """
+----------
 Produces chart showing the issuance of loans per year
-doesnt return anything
-takes ages to run because huge csv read
 ----------
 """
 
@@ -14,8 +13,12 @@ if __name__ == "__main__":
     df = dataset_clean_year()
     df = loan_conditions(df)
 
+    # printing average interest rates and annual income
+
     print(df['interest_rate'].mean())
     print(df['annual_income'].mean())
+
+    # plotting interest by year, loans by region and loans by grade
 
     fig = plt.figure(figsize=(16, 12))
 

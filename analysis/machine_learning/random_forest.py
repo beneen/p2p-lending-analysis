@@ -16,12 +16,14 @@ random forest implementation and plotting
 -----
 """
 
+
 def random_forest(dataset, length_of_features):
     # for testing
     # dataset = dataset.head(500)
 
     X_train, X_test, y_train, y_test = get_test_and_train(dataset)
 
+    # randomised search cross validation
     random_forest = RandomForestClassifier(criterion='gini', random_state=0)
     maximum_features = range(1, dataset.shape[1] - 1)
     parameters = dict(max_features=maximum_features)
@@ -42,6 +44,8 @@ def random_forest(dataset, length_of_features):
     roc_score = roc_auc_score(y_test, random_forest_predict)
     print(random_forest_accuracy)
 
+    # plots
+
     fig, ax = plt.subplots()
     width = 0.35
     ax.bar(np.arange(length_of_features - 1), random_forest.feature_importances_, width, color='r')
@@ -61,7 +65,6 @@ def random_forest(dataset, length_of_features):
 def main():
     dataset, length_of_features = data_cleaning.dataset_clean()
     random_forest(dataset, length_of_features)
-
 
 
 if __name__ == "__main__":

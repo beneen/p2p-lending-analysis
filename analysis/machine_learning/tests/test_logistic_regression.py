@@ -1,3 +1,9 @@
+"""
+-----
+test cases for logistic regression algorithm
+-----
+"""
+
 from unittest import TestCase
 
 import pandas as pd

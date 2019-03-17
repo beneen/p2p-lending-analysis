@@ -1,7 +1,6 @@
 """
+----------
 Produces charts showing loan conditions (bad v good)
-doesnt return anything
-takes ages to run because huge csv read
 ----------
 """
 
@@ -11,11 +10,15 @@ import seaborn as sns
 
 from analysis.charts.dataset_clean import dataset_clean_year
 
+# getting list of text values used in dataset corresponding to bad loans
+
 bad_loan = ["Charged Off", "Default", "Does not meet the credit policy. Status:Charged Off", "In Grace Period",
             "Late (16-30 days)", "Late (31-120 days)"]
 
 
 def loan_condition(status):
+    # if the value we are looking at is present in the bad loan list mark it as a bad loan, otherwise its good
+
     if status in bad_loan:
         return 'Bad Loan'
     else:
@@ -31,6 +34,8 @@ def loan_conditions(df):
 if __name__ == "__main__":
     df = dataset_clean_year()
     df = loan_conditions(df)
+
+    # setting up loan conditions plot
 
     f, ax = plt.subplots(1, 2, figsize=(16, 8))
 

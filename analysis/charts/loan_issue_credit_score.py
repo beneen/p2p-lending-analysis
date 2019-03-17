@@ -1,6 +1,6 @@
 """
+----------
 Produces chart showing the issuance of by credit score
-
 ----------
 """
 

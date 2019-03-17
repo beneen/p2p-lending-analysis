@@ -8,6 +8,8 @@ cross validation
 
 
 def cross_validation_best_parameters(dataset, model, param_grid):
+    # 10 fold grid search cross validation
+
     grid = GridSearchCV(model, param_grid, cv=10, scoring='accuracy')
     X = dataset.iloc[:, :-1].values
     y = dataset.iloc[:, -1].values

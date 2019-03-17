@@ -1,13 +1,13 @@
-import sys
-
-import pandas as pd
-from sklearn import preprocessing
-
 """
 -----
 Loading in the accepted.csv file and pre-processing the data for analysis
 -----
 """
+
+import sys
+
+import pandas as pd
+from sklearn import preprocessing
 
 
 def map_values_to_int(feature_selected_dataset):
@@ -58,7 +58,7 @@ def boolean_loan_status(original_uncleaned_dataset):
     # converting the loan status column to boolean from pre-defined text for our analysis
     loan_status_segment = original_uncleaned_dataset[
         (original_uncleaned_dataset['loan_status'] == "Fully Paid") | (
-                    original_uncleaned_dataset['loan_status'] == "Charged Off")]
+                original_uncleaned_dataset['loan_status'] == "Charged Off")]
     loan_status_to_boolean_dict = {"Fully Paid": 0, "Charged Off": 1}
     boolean_loan_status_dataset = loan_status_segment.replace({"loan_status": loan_status_to_boolean_dict})
     return boolean_loan_status_dataset

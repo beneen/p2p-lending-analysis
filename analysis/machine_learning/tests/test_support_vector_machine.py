@@ -1,3 +1,9 @@
+"""
+-----
+test cases for support vector machine algorithm
+-----
+"""
+
 from unittest import TestCase
 
 import pandas as pd

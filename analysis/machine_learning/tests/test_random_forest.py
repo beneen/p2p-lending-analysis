@@ -1,3 +1,9 @@
+"""
+-----
+test cases for random_forest algorithm
+-----
+"""
+
 from unittest import TestCase
 
 import pandas as pd

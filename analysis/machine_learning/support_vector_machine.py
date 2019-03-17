@@ -17,8 +17,11 @@ support vector machine is really slow to run on the full dataset but when testin
 
 def support_vector_machine(dataset):
     # for testing
+    # dataset = dataset.head(500)
 
     X_train, X_test, y_train, y_test = get_test_and_train(dataset)
+
+    # cross validation - grid search
 
     support_vector_machine_classifier = SVC()
     powers = range(0, 5)
@@ -37,6 +40,8 @@ def support_vector_machine(dataset):
         X_test.iloc[:, :])
     support_vector_machine_accuracy = accuracy_score(y_test, support_vector_machine_predictions)
     print("support vector machine accuracy ", support_vector_machine_accuracy)
+
+    # plots
     roc_curve_plot(y_test, support_vector_machine_prediction_probabilities, 'support vector machine')
     plt.show()
     plt.figure(figsize=(6, 6))

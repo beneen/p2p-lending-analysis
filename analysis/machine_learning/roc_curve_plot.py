@@ -10,6 +10,8 @@ roc curve plot function
 
 
 def roc_curve_plot(truth, pred, lab):
+    # function for plotting ROC curve
+
     fpr, tpr, _ = metrics.roc_curve(truth, pred)
     roc_auc = metrics.auc(fpr, tpr)
     lw = 2
@@ -20,5 +22,5 @@ def roc_curve_plot(truth, pred, lab):
     plt.ylim([0.0, 1.0])
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
-    plt.title('ROC curve')  # Receiver Operating Characteristic
+    plt.title('ROC curve')
     plt.legend(loc="lower right")
