@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
 from sklearn import linear_model
 from sklearn.metrics import accuracy_score
+from sklearn.model_selection import GridSearchCV
 
-from analysis.machine_learning.cross_validation import cross_validation_best_parameters
 from analysis.machine_learning.data_cleaning import data_cleaning
 from analysis.machine_learning.get_test_and_train import get_test_and_train
 from analysis.machine_learning.plotting_confusion_matrix import plotting_confusion_matrix
@@ -26,7 +26,12 @@ def logistic_regression(dataset):
     parameters = dict(C=c)
 
     # cross validation - grid search
-    best_accuracy, best_classifier = cross_validation_best_parameters(dataset, logistic_regression, parameters)
+    grid = GridSearchCV(logistic_regression, parameters, cv=10, scoring='accuracy')
+    X = dataset.iloc[:, :-1].values
+    y = dataset.iloc[:, -1].values
+    grid.fit(X, y)
+    best_accuracy = grid.best_score_
+    best_classifier = grid.best_estimator_
     print("best accuracy is " + str(best_accuracy))
     print(best_classifier)
 
